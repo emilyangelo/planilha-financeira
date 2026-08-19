@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "compra": "Notebook",
+    "categoria": "Eletrônicos",
+    "valorTotal": 3600.00,
+    "valorParcela": 300.00,
+    "parcelasTotais": 12,
+    "dataInicio": "2026-04-10",
+    "diaVencimento": 10,
+    "status": "ativo"
+  },
+  {
+    "id": 2,
+    "compra": "Tênis",
+    "categoria": "Roupa",
+    "valorTotal": 600.00,
+    "valorParcela": 120.00,
+    "parcelasTotais": 5,
+    "dataInicio": "2026-07-15",
+    "diaVencimento": 15,
+    "status": "ativo"
+  },
+  {
+    "id": 3,
+    "compra": "Curso Online UX",
+    "categoria": "Educação",
+    "valorTotal": 1500.00,
+    "valorParcela": 250.00,
+    "parcelasTotais": 6,
+    "dataInicio": "2026-03-05",
+    "diaVencimento": 5,
+    "status": "ativo"
+  }
+]

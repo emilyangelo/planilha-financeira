@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Controle Financeiro — Gerenciador Financeiro Pessoal</title>
+  <meta name="description" content="Planilha financeira pessoal inteligente e moderna em tons de rosa claro.">
+  
+  <!-- Fonte Inter do Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Estilos da Planilha -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <div class="app-container">
+
+    <!-- ==========================================================================
+         1. CABEÇALHO E SELETOR DE PERÍODO
+         ========================================================================== -->
+    <header class="app-header">
+      <div class="brand-group">
+        <h1 class="brand-title">Controle Financeiro</h1>
+        <p class="brand-subtitle">Controle financeiro pessoal</p>
+      </div>
+
+      <nav class="period-selector" aria-label="Navegação de Período">
+        <button id="btnPrevMonth" class="btn-period-nav" title="Mês anterior">&lt; Mês anterior</button>
+        
+        <span id="currentPeriodLabel" class="current-period-display">AGOSTO 2026</span>
+        
+        <button id="btnNextMonth" class="btn-period-nav" title="Mês seguinte">Mês seguinte &gt;</button>
+
+        <div class="period-dropdowns">
+          <select id="selectMonth" class="select-period" aria-label="Selecionar Mês">
+            <option value="0">Janeiro</option>
+            <option value="1">Fevereiro</option>
+            <option value="2">Março</option>
+            <option value="3">Abril</option>
+            <option value="4">Maio</option>
+            <option value="5">Junho</option>
+            <option value="6">Julho</option>
+            <option value="7">Agosto</option>
+            <option value="8">Setembro</option>
+            <option value="9">Outubro</option>
+            <option value="10">Novembro</option>
+            <option value="11">Dezembro</option>
+          </select>
+          <select id="selectYear" class="select-period" aria-label="Selecionar Ano">
+            <option value="2024">2024</option>
+            <option value="2025">2025</option>
+            <option value="2026">2026</option>
+            <option value="2027">2027</option>
+            <option value="2028">2028</option>
+            <option value="2029">2029</option>
+            <option value="2030">2030</option>
+          </select>
+        </div>
+      </nav>
+    </header>
+
+    <!-- ==========================================================================
+         2. RESUMO FINANCEIRO COMPACTO (ESTILO PLANILHA COM "MINHA RENDA")
+         ========================================================================== -->
+    <section class="summary-bar" aria-label="Resumo Financeiro do Mês">
+      <div class="summary-cell renda">
+        <div class="cell-header">
+          <span class="summary-label">Minha Renda</span>
+          <button id="btnOpenRendaModal" class="btn-text-action" title="Editar Renda deste Mês">✏️ Editar</button>
+        </div>
+        <span id="sumMinhaRenda" class="summary-value">R$ 0,00</span>
+      </div>
+
+      <div class="summary-cell entradas">
+        <span class="summary-label">Outras Receitas</span>
+        <span id="sumOutrasReceitas" class="summary-value">R$ 0,00</span>
+      </div>
+
+      <div class="summary-cell despesas">
+        <span class="summary-label">Total Despesas</span>
+        <span id="sumDespesas" class="summary-value">R$ 0,00</span>
+      </div>
+
+      <div class="summary-cell saldo">
+        <span class="summary-label">Saldo Atual</span>
+        <span id="sumSaldo" class="summary-value">R$ 0,00</span>
+      </div>
+
+      <div class="summary-cell fixos">
+        <span class="summary-label">Gastos Fixos</span>
+        <span id="sumGastosFixos" class="summary-value">R$ 0,00</span>
+      </div>
+
+      <div class="summary-cell parcelas">
+        <span class="summary-label">Parcelamentos</span>
+        <span id="sumParcelamentos" class="summary-value">R$ 0,00</span>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         3. SEÇÃO PRINCIPAL — GASTOS DO MÊS
+         ========================================================================== -->
+    <section class="sheet-section" id="sec-lancamentos">
+      <div class="section-header">
+        <div class="section-title-group">
+          <h2 class="section-title">Gastos do mês</h2>
+        </div>
+
+        <div class="section-actions">
+          <div class="filter-group">
+            <span class="filter-label">Categoria:</span>
+            <select id="filterCategory" class="select-filter" aria-label="Filtrar por Categoria">
+              <option value="Todas">Todas as categorias</option>
+              <option value="Comida">Comida</option>
+              <option value="Uber">Uber</option>
+              <option value="Roupa">Roupa</option>
+              <option value="Presente">Presente</option>
+              <option value="Beleza">Beleza</option>
+              <option value="Moradia">Moradia</option>
+              <option value="Transporte">Transporte</option>
+              <option value="Lazer">Lazer</option>
+              <option value="Saúde">Saúde</option>
+              <option value="Educação">Educação</option>
+              <option value="Salário">Salário</option>
+              <option value="Freelance">Freelance</option>
+              <option value="Investimentos">Investimentos</option>
+              <option value="Outros">Outros</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <span class="filter-label">Tipo:</span>
+            <select id="filterType" class="select-filter" aria-label="Filtrar por Tipo">
+              <option value="Todos">Todos</option>
+              <option value="receita">Receita</option>
+              <option value="despesa">Despesa</option>
+            </select>
+          </div>
+
+          <button id="btnOpenLancamentoModal" class="btn-primary" type="button">+ Adicionar lançamento</button>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="sheet-table" id="tableLancamentos">
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Descrição</th>
+              <th>Categoria</th>
+              <th>Tipo</th>
+              <th class="num-col">Valor</th>
+              <th class="center-col">Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tbodyLancamentos">
+            <!-- Linhas dinâmicas -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         4. GRÁFICO DE PIZZA — GASTOS POR CATEGORIA
+         ========================================================================== -->
+    <section class="sheet-section" id="sec-grafico">
+      <div class="section-header">
+        <h2 class="section-title">Com o que mais gastei este mês?</h2>
+      </div>
+
+      <div class="chart-layout">
+        <div class="canvas-container">
+          <canvas id="pieChart" width="280" height="280"></canvas>
+        </div>
+
+        <div class="chart-info-panel">
+          <div id="highlightBanner" class="highlight-banner">
+            <span class="highlight-label">Maior gasto do mês:</span>
+            <span class="highlight-value">Carregando...</span>
+          </div>
+
+          <div id="chartLegend" class="chart-legend">
+            <!-- Legenda gerada via charts.js -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         5. GASTOS FIXOS DO MÊS
+         ========================================================================== -->
+    <section class="sheet-section" id="sec-gastos-fixos">
+      <div class="section-header">
+        <div class="section-title-group">
+          <h2 class="section-title">Gastos Fixos do Mês</h2>
+        </div>
+
+        <div class="section-actions">
+          <button id="btnOpenGastoFixoModal" class="btn-primary" type="button">+ Novo gasto fixo</button>
+        </div>
+      </div>
+
+      <div class="section-summary-badges">
+        <span class="badge-counter">Total Fixos: <strong id="badgeFixosTotal">R$ 0,00</strong></span>
+        <span class="badge-counter">Total Pago: <strong id="badgeFixosPago" style="color: var(--color-pago)">R$ 0,00</strong></span>
+        <span class="badge-counter">Total Pendente: <strong id="badgeFixosPendente" style="color: var(--color-pendente)">R$ 0,00</strong></span>
+        <span class="badge-counter">Total Atrasado: <strong id="badgeFixosAtrasado" style="color: var(--color-atrasado)">R$ 0,00</strong></span>
+      </div>
+
+      <div class="table-responsive">
+        <table class="sheet-table" id="tableGastosFixos">
+          <thead>
+            <tr>
+              <th>Despesa</th>
+              <th>Categoria</th>
+              <th>Vencimento</th>
+              <th class="num-col">Valor</th>
+              <th class="center-col">Status</th>
+              <th class="center-col">Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tbodyGastosFixos">
+            <!-- Linhas dinâmicas -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         6. PARCELAMENTOS
+         ========================================================================== -->
+    <section class="sheet-section" id="sec-parcelamentos">
+      <div class="section-header">
+        <div class="section-title-group">
+          <h2 class="section-title">Parcelamentos</h2>
+        </div>
+
+        <div class="section-actions">
+          <button id="btnOpenParcelamentoModal" class="btn-primary" type="button">+ Novo parcelamento</button>
+        </div>
+      </div>
+
+      <div class="section-summary-badges">
+        <span class="badge-counter">Parcelamentos Ativos: <strong id="badgeParcAtivos">0</strong></span>
+        <span class="badge-counter">Parcelas do Mês: <strong id="badgeParcValorMes">R$ 0,00</strong></span>
+        <span class="badge-counter">Total Comprometido: <strong id="badgeParcTotalComprometido">R$ 0,00</strong></span>
+      </div>
+
+      <div class="table-responsive">
+        <table class="sheet-table" id="tableParcelamentos">
+          <thead>
+            <tr>
+              <th>Compra</th>
+              <th>Categoria</th>
+              <th class="center-col">Parcela</th>
+              <th class="num-col">Valor da Parcela</th>
+              <th>Vencimento</th>
+              <th class="center-col">Status</th>
+              <th class="center-col">Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tbodyParcelamentos">
+            <!-- Linhas dinâmicas -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- RODAPÉ -->
+    <footer class="app-footer">
+      <p>Controle Financeiro © 2026 — Controle financeiro pessoal em planilha inteligente.</p>
+    </footer>
+
+  </div>
+
+  <!-- ==========================================================================
+       MODAIS (RENDA / LANÇAMENTO / GASTO FIXO / PARCELAMENTO)
+       ========================================================================== -->
+
+  <!-- Modal Editar Renda -->
+  <div id="modalRenda" class="modal-backdrop" aria-hidden="true">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title">Editar Minha Renda</h3>
+        <button class="modal-close" data-close="modalRenda">&times;</button>
+      </div>
+      <form id="formRenda">
+        <p class="form-help-text">Defina sua renda fixa mensal para o período selecionado (<strong id="modalRendaPeriodo">AGOSTO 2026</strong>):</p>
+        <div class="form-group" style="margin-top: 12px;">
+          <label for="rendaValorInput" class="form-label">Valor da Renda (R$)</label>
+          <input type="number" step="0.01" min="0" id="rendaValorInput" class="form-input" placeholder="2500.00" required>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" data-close="modalRenda">Cancelar</button>
+          <button type="submit" class="btn-primary">Salvar Renda</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal Lançamento -->
+  <div id="modalLancamento" class="modal-backdrop" aria-hidden="true">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="modalLancamentoTitle" class="modal-title">Novo Lançamento</h3>
+        <button class="modal-close" data-close="modalLancamento">&times;</button>
+      </div>
+      <form id="formLancamento">
+        <input type="hidden" id="lancamentoId">
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="lancamentoTipo" class="form-label">Tipo</label>
+            <select id="lancamentoTipo" class="form-select" required>
+              <option value="despesa">Despesa</option>
+              <option value="receita">Receita (Outras)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="lancamentoData" class="form-label">Data</label>
+            <input type="date" id="lancamentoData" class="form-input" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="lancamentoDescricao" class="form-label">Descrição</label>
+          <input type="text" id="lancamentoDescricao" class="form-input" placeholder="Ex: Almoço, Freelance, Uber" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="lancamentoCategoria" class="form-label">Categoria</label>
+            <select id="lancamentoCategoria" class="form-select" required>
+              <option value="Comida">Comida</option>
+              <option value="Uber">Uber</option>
+              <option value="Roupa">Roupa</option>
+              <option value="Presente">Presente</option>
+              <option value="Beleza">Beleza</option>
+              <option value="Moradia">Moradia</option>
+              <option value="Transporte">Transporte</option>
+              <option value="Lazer">Lazer</option>
+              <option value="Saúde">Saúde</option>
+              <option value="Educação">Educação</option>
+              <option value="Salário">Salário</option>
+              <option value="Freelance">Freelance</option>
+              <option value="Investimentos">Investimentos</option>
+              <option value="Outros">Outros</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="lancamentoValor" class="form-label">Valor (R$)</label>
+            <input type="number" step="0.01" min="0.01" id="lancamentoValor" class="form-input" placeholder="0,00" required>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" data-close="modalLancamento">Cancelar</button>
+          <button type="submit" class="btn-primary">Salvar Lançamento</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal Gasto Fixo -->
+  <div id="modalGastoFixo" class="modal-backdrop" aria-hidden="true">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="modalGastoFixoTitle" class="modal-title">Novo Gasto Fixo</h3>
+        <button class="modal-close" data-close="modalGastoFixo">&times;</button>
+      </div>
+      <form id="formGastoFixo">
+        <input type="hidden" id="gastoFixoId">
+
+        <div class="form-group">
+          <label for="gastoFixoDespesa" class="form-label">Despesa</label>
+          <input type="text" id="gastoFixoDespesa" class="form-input" placeholder="Ex: Aluguel, Internet, Netflix" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="gastoFixoCategoria" class="form-label">Categoria</label>
+            <select id="gastoFixoCategoria" class="form-select" required>
+              <option value="Moradia">Moradia</option>
+              <option value="Saúde">Saúde</option>
+              <option value="Lazer">Lazer</option>
+              <option value="Educação">Educação</option>
+              <option value="Transporte">Transporte</option>
+              <option value="Outros">Outros</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="gastoFixoDiaVencimento" class="form-label">Dia do Vencimento</label>
+            <input type="number" min="1" max="31" id="gastoFixoDiaVencimento" class="form-input" placeholder="Ex: 10" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="gastoFixoValor" class="form-label">Valor (R$)</label>
+            <input type="number" step="0.01" min="0.01" id="gastoFixoValor" class="form-input" placeholder="0,00" required>
+          </div>
+          <div class="form-group">
+            <label for="gastoFixoStatus" class="form-label">Status</label>
+            <select id="gastoFixoStatus" class="form-select" required>
+              <option value="pendente">Pendente</option>
+              <option value="pago">Pago</option>
+              <option value="atrasado">Atrasado</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" data-close="modalGastoFixo">Cancelar</button>
+          <button type="submit" class="btn-primary">Salvar Gasto Fixo</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal Parcelamento -->
+  <div id="modalParcelamento" class="modal-backdrop" aria-hidden="true">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="modalParcelamentoTitle" class="modal-title">Novo Parcelamento</h3>
+        <button class="modal-close" data-close="modalParcelamento">&times;</button>
+      </div>
+      <form id="formParcelamento">
+        <input type="hidden" id="parcelamentoId">
+
+        <div class="form-group">
+          <label for="parcelamentoCompra" class="form-label">Descrição da Compra</label>
+          <input type="text" id="parcelamentoCompra" class="form-input" placeholder="Ex: Notebook, Tênis" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="parcelamentoCategoria" class="form-label">Categoria</label>
+            <select id="parcelamentoCategoria" class="form-select" required>
+              <option value="Eletrônicos">Eletrônicos</option>
+              <option value="Roupa">Roupa</option>
+              <option value="Moradia">Moradia</option>
+              <option value="Educação">Educação</option>
+              <option value="Lazer">Lazer</option>
+              <option value="Outros">Outros</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="parcelamentoDataInicio" class="form-label">Data Primeira Parcela</label>
+            <input type="date" id="parcelamentoDataInicio" class="form-input" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="parcelamentoValorTotal" class="form-label">Valor Total (R$)</label>
+            <input type="number" step="0.01" min="0.01" id="parcelamentoValorTotal" class="form-input" placeholder="0,00" required>
+          </div>
+          <div class="form-group">
+            <label for="parcelamentoParcelasTotais" class="form-label">Qtd. Parcelas</label>
+            <input type="number" min="1" max="99" id="parcelamentoParcelasTotais" class="form-input" placeholder="Ex: 12" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="parcelamentoValorParcela" class="form-label">Valor da Parcela (R$)</label>
+            <input type="number" step="0.01" min="0.01" id="parcelamentoValorParcela" class="form-input" placeholder="0,00" required>
+          </div>
+          <div class="form-group">
+            <label for="parcelamentoDiaVencimento" class="form-label">Dia do Vencimento</label>
+            <input type="number" min="1" max="31" id="parcelamentoDiaVencimento" class="form-input" placeholder="Ex: 10" required>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" data-close="modalParcelamento">Cancelar</button>
+          <button type="submit" class="btn-primary">Salvar Parcelamento</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts Javascript -->
+  <script src="js/database.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>

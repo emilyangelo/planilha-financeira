@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "despesa": "Aluguel",
+    "categoria": "Moradia",
+    "vencimento": "05/08/2026",
+    "diaVencimento": 5,
+    "valor": 800.00,
+    "status": "pago",
+    "mesAno": "2026-08"
+  },
+  {
+    "id": 2,
+    "despesa": "Internet Fibra",
+    "categoria": "Moradia",
+    "vencimento": "10/08/2026",
+    "diaVencimento": 10,
+    "valor": 100.00,
+    "status": "pago",
+    "mesAno": "2026-08"
+  },
+  {
+    "id": 3,
+    "despesa": "Academia",
+    "categoria": "Saúde",
+    "vencimento": "15/08/2026",
+    "diaVencimento": 15,
+    "valor": 80.00,
+    "status": "pendente",
+    "mesAno": "2026-08"
+  },
+  {
+    "id": 4,
+    "despesa": "Netflix",
+    "categoria": "Lazer",
+    "vencimento": "20/08/2026",
+    "diaVencimento": 20,
+    "valor": 40.00,
+    "status": "pendente",
+    "mesAno": "2026-08"
+  },
+  {
+    "id": 5,
+    "despesa": "Plano de Saúde",
+    "categoria": "Saúde",
+    "vencimento": "02/08/2026",
+    "diaVencimento": 2,
+    "valor": 250.00,
+    "status": "atrasado",
+    "mesAno": "2026-08"
+  },
+  {
+    "id": 6,
+    "despesa": "Aluguel",
+    "categoria": "Moradia",
+    "vencimento": "05/07/2026",
+    "diaVencimento": 5,
+    "valor": 800.00,
+    "status": "pago",
+    "mesAno": "2026-07"
+  },
+  {
+    "id": 7,
+    "despesa": "Internet Fibra",
+    "categoria": "Moradia",
+    "vencimento": "10/07/2026",
+    "diaVencimento": 10,
+    "valor": 100.00,
+    "status": "pago",
+    "mesAno": "2026-07"
+  },
+  {
+    "id": 8,
+    "despesa": "Aluguel",
+    "categoria": "Moradia",
+    "vencimento": "05/09/2026",
+    "diaVencimento": 5,
+    "valor": 800.00,
+    "status": "pendente",
+    "mesAno": "2026-09"
+  }
+]

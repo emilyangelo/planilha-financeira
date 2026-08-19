@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "descricao": "Salário Mensal",
+    "categoria": "Salário",
+    "tipo": "receita",
+    "valor": 4500.00,
+    "data": "2026-08-01",
+    "mesAno": "2026-08"
+  },
+  {
+    "id": 2,
+    "descricao": "Supermercado Semanal",
+    "categoria": "Comida",
+    "tipo": "despesa",
+    "valor": 420.50,
+    "data": "2026-08-05",
+    "mesAno": "2026-08"
+  },
+  {
+    "id": 3,
+    "descricao": "Almoço de Domingo",
+    "categoria": "Comida",
+    "tipo": "despesa",
+    "valor": 65.00,
+    "data": "2026-08-19",
+    "mesAno": "2026-08"
+  },
+  {
+    "id": 4,
+    "descricao": "Corrida Uber Trabalho",
+    "categoria": "Uber",
+    "tipo": "despesa",
+    "valor": 22.50,
+    "data": "2026-08-18",
+    "mesAno": "2026-08"
+  },
+  {
+    "id": 5,
+    "descricao": "Presente de Aniversário",
+    "categoria": "Presente",
+    "tipo": "despesa",
+    "valor": 80.00,
+    "data": "2026-08-17",
+    "mesAno": "2026-08"
+  },
+  {
+    "id": 6,
+    "descricao": "Blusa Rosa de Frio",
+    "categoria": "Roupa",
+    "tipo": "despesa",
+    "valor": 120.00,
+    "data": "2026-08-15",
+    "mesAno": "2026-08"
+  },
+  {
+    "id": 7,
+    "descricao": "Corte de Cabelo e Unha",
+    "categoria": "Beleza",
+    "tipo": "despesa",
+    "valor": 180.00,
+    "data": "2026-08-10",
+    "mesAno": "2026-08"
+  },
+  {
+    "id": 8,
+    "descricao": "Projeto Freelance Design",
+    "categoria": "Freelance",
+    "tipo": "receita",
+    "valor": 850.00,
+    "data": "2026-08-12",
+    "mesAno": "2026-08"
+  },
+  {
+    "id": 9,
+    "descricao": "Farmácia e Remédios",
+    "categoria": "Saúde",
+    "tipo": "despesa",
+    "valor": 95.40,
+    "data": "2026-08-08",
+    "mesAno": "2026-08"
+  },
+  {
+    "id": 10,
+    "descricao": "Salário Mensal",
+    "categoria": "Salário",
+    "tipo": "receita",
+    "valor": 4500.00,
+    "data": "2026-07-01",
+    "mesAno": "2026-07"
+  },
+  {
+    "id": 11,
+    "descricao": "Restaurante com Amigos",
+    "categoria": "Comida",
+    "tipo": "despesa",
+    "valor": 230.00,
+    "data": "2026-07-15",
+    "mesAno": "2026-07"
+  },
+  {
+    "id": 12,
+    "descricao": "Calça Jeans",
+    "categoria": "Roupa",
+    "tipo": "despesa",
+    "valor": 190.00,
+    "data": "2026-07-20",
+    "mesAno": "2026-07"
+  },
+  {
+    "id": 13,
+    "descricao": "Salário Mensal",
+    "categoria": "Salário",
+    "tipo": "receita",
+    "valor": 4500.00,
+    "data": "2026-09-01",
+    "mesAno": "2026-09"
+  },
+  {
+    "id": 14,
+    "descricao": "Feira da Semana",
+    "categoria": "Comida",
+    "tipo": "despesa",
+    "valor": 150.00,
+    "data": "2026-09-03",
+    "mesAno": "2026-09"
+  }
+]

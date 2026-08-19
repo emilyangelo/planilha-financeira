@@ -1,0 +1,740 @@
+/* ==========================================================================
+   CONTROLE FINANCEIRO — ESTILOS ESTILO PLANILHA FINANCEIRA MODERNA
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg-body: #FFF7FA;
+  --bg-surface: #FFFFFF;
+  --primary-pink: #DB4F83;
+  --light-pink: #FCE7F3;
+  --highlight-pink: #EC6FA3;
+  --select-pink: #C9366F;
+  --border-color: #F3D5E2;
+  --text-primary: #3F2934;
+  --text-secondary: #806A74;
+  
+  --color-receita: #16A34A;
+  --color-despesa: #DC2626;
+  --color-atencao: #D97706;
+  --color-pago: #16A34A;
+  --color-pendente: #D97706;
+  --color-atrasado: #DC2626;
+
+  --hover-table-row: #FFF1F6;
+  --shadow-sm: 0 1px 3px rgba(63, 41, 52, 0.05);
+}
+
+/* Reset básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-body);
+  color: var(--text-primary);
+  line-height: 1.5;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Container Principal */
+.app-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 20px 24px 60px 24px;
+}
+
+/* ==========================================================================
+   1. CABEÇALHO E NAVEGAÇÃO DE MÊS
+   ========================================================================== */
+
+.app-header {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 20px 24px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+@media (min-width: 768px) {
+  .app-header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.brand-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-pink);
+  letter-spacing: -0.02em;
+}
+
+.brand-subtitle {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+/* Seletor de Período Inspirado em Planilhas */
+.period-selector {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: var(--bg-body);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 6px 12px;
+}
+
+.btn-period-nav {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-period-nav:hover {
+  background-color: var(--light-pink);
+  border-color: var(--highlight-pink);
+  color: var(--select-pink);
+}
+
+.current-period-display {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--select-pink);
+  min-width: 140px;
+  text-align: center;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.period-dropdowns {
+  display: flex;
+  gap: 6px;
+}
+
+.select-period {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+}
+
+.select-period:focus {
+  border-color: var(--primary-pink);
+}
+
+/* ==========================================================================
+   2. RESUMO FINANCEIRO (ESTILO CÉLULAS DE PLANILHA)
+   ========================================================================== */
+
+.summary-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.summary-cell {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.2s ease;
+}
+
+.summary-cell:hover {
+  border-color: var(--highlight-pink);
+}
+
+.cell-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.summary-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+}
+
+.btn-text-action {
+  background: none;
+  border: none;
+  color: var(--primary-pink);
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 3px;
+  transition: background-color 0.15s ease;
+}
+
+.btn-text-action:hover {
+  background-color: var(--light-pink);
+  color: var(--select-pink);
+}
+
+.summary-value {
+  font-size: 1.2rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.summary-cell.renda .summary-value {
+  color: var(--color-receita);
+}
+
+.summary-cell.saldo .summary-value {
+  color: var(--select-pink);
+}
+
+.summary-cell.entradas .summary-value {
+  color: var(--color-receita);
+}
+
+.summary-cell.despesas .summary-value {
+  color: var(--color-despesa);
+}
+
+.summary-cell.fixos .summary-value {
+  color: var(--text-primary);
+}
+
+.summary-cell.parcelas .summary-value {
+  color: var(--text-primary);
+}
+
+/* ==========================================================================
+   3. SEÇÕES ESTILO PLANILHA (SECTIONS & TABLES)
+   ========================================================================== */
+
+.sheet-section {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 20px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-sm);
+}
+
+.section-header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+@media (min-width: 768px) {
+  .section-header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.section-title-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.section-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Botões Principais */
+.btn-primary {
+  background-color: var(--primary-pink);
+  color: #FFFFFF;
+  border: none;
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background-color 0.15s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--select-pink);
+}
+
+.btn-secondary {
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 8px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-secondary:hover {
+  background-color: var(--light-pink);
+  border-color: var(--highlight-pink);
+}
+
+.btn-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  font-size: 0.85rem;
+  border-radius: 4px;
+  color: var(--text-secondary);
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-icon:hover {
+  background-color: var(--light-pink);
+  color: var(--select-pink);
+}
+
+.btn-icon.delete:hover {
+  background-color: #FEE2E2;
+  color: var(--color-despesa);
+}
+
+/* Select de Filtros */
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.select-filter {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.85rem;
+  padding: 6px 10px;
+  border-radius: 4px;
+  outline: none;
+}
+
+.select-filter:focus {
+  border-color: var(--primary-pink);
+}
+
+/* ==========================================================================
+   4. TABELAS ESTILO PLANILHA
+   ========================================================================== */
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.sheet-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  text-align: left;
+}
+
+.sheet-table th {
+  background-color: var(--light-pink);
+  color: var(--text-primary);
+  font-weight: 600;
+  padding: 10px 12px;
+  border-bottom: 2px solid var(--border-color);
+  white-space: nowrap;
+}
+
+.sheet-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.sheet-table tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+.sheet-table tbody tr:hover {
+  background-color: var(--hover-table-row);
+}
+
+/* Alinhamento numérico e de data */
+.sheet-table th.num-col,
+.sheet-table td.num-col {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+}
+
+.sheet-table th.center-col,
+.sheet-table td.center-col {
+  text-align: center;
+}
+
+/* Badges e Status */
+.badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.badge.despesa {
+  background-color: #FEE2E2;
+  color: var(--color-despesa);
+}
+
+.badge.receita {
+  background-color: #DCFCE7;
+  color: var(--color-receita);
+}
+
+.badge-status {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+.badge-status.pago {
+  background-color: #DCFCE7;
+  color: var(--color-pago);
+}
+
+.badge-status.pendente {
+  background-color: #FEF3C7;
+  color: var(--color-pendente);
+}
+
+.badge-status.atrasado {
+  background-color: #FEE2E2;
+  color: var(--color-atrasado);
+}
+
+.badge-status.ativo {
+  background-color: var(--light-pink);
+  color: var(--select-pink);
+  cursor: default;
+}
+
+/* Mensagem de Tabela Vazia */
+.empty-table-msg {
+  text-align: center;
+  padding: 30px 16px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.empty-table-msg .btn-primary {
+  margin-top: 12px;
+}
+
+/* ==========================================================================
+   5. GRÁFICO DE PIZZA (CANVAS + LEGENDA + HIGHLIGHT)
+   ========================================================================== */
+
+.chart-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .chart-layout {
+    grid-template-columns: 280px 1fr;
+  }
+}
+
+.canvas-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#pieChart {
+  width: 260px;
+  height: 260px;
+}
+
+.chart-info-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.highlight-banner {
+  background-color: var(--light-pink);
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--primary-pink);
+  padding: 12px 16px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.highlight-label {
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.highlight-value {
+  color: var(--select-pink);
+  margin-left: 4px;
+}
+
+.chart-legend-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 8px 16px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  font-size: 0.85rem;
+  gap: 8px;
+}
+
+.legend-color-box {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.legend-cat {
+  font-weight: 500;
+  color: var(--text-primary);
+  flex-grow: 1;
+}
+
+.legend-val {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.legend-pct {
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+}
+
+.chart-empty-msg {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-style: italic;
+}
+
+/* Resumos Internos de Seção */
+.section-summary-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 12px;
+  background-color: var(--bg-body);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 8px 12px;
+}
+
+.badge-counter {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.badge-counter strong {
+  color: var(--text-primary);
+}
+
+/* ==========================================================================
+   6. MODAIS E FORMULÁRIOS
+   ========================================================================== */
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(63, 41, 52, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.modal-backdrop.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-box {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  width: 100%;
+  max-width: 480px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(63, 41, 52, 0.15);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.modal-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--select-pink);
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: var(--text-secondary);
+}
+
+.modal-close:hover {
+  color: var(--select-pink);
+}
+
+.form-help-text {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.form-group {
+  margin-bottom: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.form-input,
+.form-select {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.9rem;
+  padding: 8px 12px;
+  border-radius: 4px;
+  outline: none;
+  width: 100%;
+}
+
+.form-input:focus,
+.form-select:focus {
+  border-color: var(--primary-pink);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-color);
+}
+
+/* ==========================================================================
+   7. RODAPÉ
+   ========================================================================== */
+
+.app-footer {
+  text-align: center;
+  padding: 20px 0;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  border-top: 1px solid var(--border-color);
+  margin-top: 40px;
+}

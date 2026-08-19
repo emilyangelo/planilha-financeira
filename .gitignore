@@ -1,0 +1,37 @@
+# Arquivos do Sistema Operacional
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Configurações de Editores e IDEs
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.swp
+*.swo
+
+# Arquivos de Log e Temporários
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.tmp
+*.temp
+
+# Variáveis de Ambiente e Arquivos Locais
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
